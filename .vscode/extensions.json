@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode"
+  ],
+  "unwantedRecommendations": [
+    "m1lando.djlint"
+  ]
+}

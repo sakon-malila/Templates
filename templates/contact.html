@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mt-4">Contact Us</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item"><a href="{% url 'index' %}">Dashboard</a></li>
+  <li class="breadcrumb-item active">Contact</li>
+</ol>
+<div class="card mb-4">
+  <div class="card-body">
+    <p class="mb-0">
+      If you have any questions or feedback, please feel free to reach out to us:
+    </p>
+    <ul class="mt-3">
+      <li><strong>Email:</strong> support@example.com</li>
+      <li><strong>Phone:</strong> +1 (555) 019-2834</li>
+      <li><strong>Address:</strong> 123 Innovation Way, Tech Suite 500</li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
