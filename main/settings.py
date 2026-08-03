@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-_b#&1b@#lcvwl9v0!%e$=af@c-gs9^s8=+no_pzida=7m-70b5"
+SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-_b#&1b@#lcvwl9v0!%e$=af@c-gs9^s8=+no_pzida=7m-70b5")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -76,8 +78,9 @@ WSGI_APPLICATION = "main.wsgi.application"
 import dj_database_url
 
 DATABASES = {
-    "default": dj_database_url.parse(
-        "postgresql://neondb_owner:npg_gMDf6J7ILRPj@ep-bold-frost-azkh06d0-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+    "default": dj_database_url.config(
+        default="postgresql://neondb_owner:npg_gMDf6J7ILRPj@ep-bold-frost-azkh06d0-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
+        conn_max_age=600
     )
 }
 
@@ -120,4 +123,4 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / 'statics']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
