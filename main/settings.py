@@ -12,13 +12,20 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 from pathlib import Path
+# pyrefly: ignore [missing-import]
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+# Try loading environment variables from .env.local or .env if python-dotenv is present
+try:
+    # pyrefly: ignore [missing-import]
+    from dotenv import load_dotenv
+    load_dotenv(BASE_DIR / ".env.local")
+    load_dotenv(BASE_DIR / ".env")
+except ImportError:
+    pass
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-_b#&1b@#lcvwl9v0!%e$=af@c-gs9^s8=+no_pzida=7m-70b5")
@@ -26,7 +33,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-_b#&1b@#lcvwl9v0!%e$=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = ["*"]
+allowed_hosts_str = os.environ.get("ALLOWED_HOSTS", ".vercel.app,localhost,127.0.0.1,*")
+ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(",") if host.strip()]
 
 
 # Application definition
@@ -75,15 +83,12 @@ WSGI_APPLICATION = "main.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-import dj_database_url
-
 DATABASES = {
     "default": dj_database_url.config(
         default="postgresql://neondb_owner:npg_gMDf6J7ILRPj@ep-bold-frost-azkh06d0-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
         conn_max_age=600
     )
 }
-
 
 
 # Password validation
