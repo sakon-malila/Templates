@@ -7,6 +7,7 @@
   <thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">ID</th>
       <th scope="col">Prefix</th>
       <th scope="col">First</th>
       <th scope="col">Last</th>
@@ -16,6 +17,7 @@
     {% for student in students %}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
+      <td>{{student.std_id}}</td>
       <td>{{student.prefix}}</td>
       <td>{{student.fname}}</td>
       <td>{{student.lname}}</td>
