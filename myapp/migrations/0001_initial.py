@@ -32,8 +32,8 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("stu_id", models.CharField(max_length=12, unique=True)),
-                ("fname", models.CharField(max_length=100)),
-                ("lname", models.CharField(max_length=100)),
+                ("fname", models.CharField(max_length=100, blank=True)),
+                ("lname", models.CharField(max_length=100, blank=True)),
             ],
         ),
     ]

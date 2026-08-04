@@ -6,7 +6,7 @@ from django.contrib import admin
 from django.urls import reverse
 
 # Create your models here.
-#st_id, fname, lname
+#stu_id, fname, lname
 
 PREFIX_NAME = (
     ("นาย", "นาย"),
