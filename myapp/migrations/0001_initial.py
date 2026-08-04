@@ -31,9 +31,10 @@ class Migration(migrations.Migration):
                         max_length=10,
                     ),
                 ),
-                ("stu_id", models.CharField(max_length=12, unique=True)),
-                ("fname", models.CharField(max_length=100, blank=True)),
-                ("lname", models.CharField(max_length=100, blank=True)),
+                ("st_id", models.CharField(max_length=12, unique=True)),
+                ("fname", models.CharField(max_length=100)),
+                ("lname", models.CharField(max_length=100)),
+
             ],
         ),
     ]
