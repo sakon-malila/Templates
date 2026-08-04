@@ -9,7 +9,8 @@ def index(request):
        'title':'My Home Page',   
 
     }
-    context['students'] = Student.objects.all().order_by('std_id')
+    context['students'] = Student.objects.all().order_by('stu_id')
+
     context['date']= datetime.date.today()
     return render(request, "index.html",context)
 
